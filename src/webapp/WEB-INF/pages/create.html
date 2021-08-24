@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form th:method="post" th:action="@{/admin/users}" th:object="${user}">
+    <label for="login">User Login: </label>
+    <input type="text" th:field="*{login}" id="login">
+    <br>
+    <label for="password">User Password: </label>
+    <input type="password" th:field="*{password}" id="password">
+    <br>
+    <label for="name">User Name: </label>
+    <input type="text" th:field="*{name}" id="name">
+    <br>
+    <label for="surname">User Surname: </label>
+    <input type="text" th:field="*{surname}" id="surname">
+    <br>
+    <label for="age">User Age: </label>
+    <input type="text" th:field="*{age}" id="age">
+    <br>
+    <label for="email">User Email: </label>
+    <input type="text" th:field="*{email}" id="email">
+    <br>
+    <label for="roles">Roles:</label>
+    <ul class="checkbox-list" id="roles">
+        <li th:each="role : ${allRoles}">
+            <input type="checkbox" name="roles" th:value="${role.getId()} +':'+ ${role.getName()}" th:text="${role.getName()}" th:field="*{roles}"/>
+        </li>
+
+    </ul>
+    <br>
+    <input type="submit" value="Create"/>
+</form>
+<br>
+<form th:method="get" th:action="@{/admin/users}">
+    <input type="submit" value="Return">
+</form>
+<br>
+<form th:method="get" th:action="@{/logout}">
+    <input type="submit" value="Logout">
+</form>
+
+</body>
+</html>
