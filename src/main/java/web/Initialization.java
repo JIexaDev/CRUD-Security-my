@@ -31,11 +31,9 @@ public class Initialization {
     public void init(){
         Role admin = new Role(1L, "ROLE_ADMIN");
         Role user = new Role(2L, "ROLE_USER");
-//        Role guest = new Role(3L, "ROLE_GUEST");
 
         roleService.save(admin);
         roleService.save(user);
-//        roleService.save(guest);
 
         Set<Role> allAccess = new HashSet<>();
         Set<Role> userAccess = new HashSet<>();

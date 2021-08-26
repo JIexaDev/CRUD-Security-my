@@ -1,6 +1,7 @@
 package web.dao;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import web.models.Role;
 
 import javax.persistence.EntityManager;
@@ -8,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
+@Transactional(readOnly = true)
 public class RoleDaoImpl implements RoleDao {
 
     @PersistenceContext
@@ -25,7 +27,12 @@ public class RoleDaoImpl implements RoleDao {
     }
 
     @Override
+    @Transactional
     public void save(Role role) {
-        entityManager.persist(role);
+        if (entityManager.contains(role)) {
+            entityManager.persist(role);
+        } else {
+            entityManager.merge(role);
+        }
     }
 }
